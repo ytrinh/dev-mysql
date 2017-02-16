@@ -1,7 +1,9 @@
 FROM alpine:3.5
 
+LABEL authors="Yung Trinh"
+
 RUN apk update && \
-	apk add mysql mysql-client && \
+	apk add bash mysql mysql-client && \
 	addgroup mysql mysql && \
 	mkdir /scripts && \
 	rm -rf /var/cache/apk/*
@@ -13,9 +15,9 @@ ENV MYSQL_USER_PWD dev
 ENV MYSQL_USER_DB dev
 
 COPY ./startup.sh /scripts/startup.sh
-COPY ./schema /scripts/pre-init.d/schema
+COPY ./schema /scripts/schema
 RUN chmod +x /scripts/startup.sh \
-  && chmod +x /scripts/pre-init.d/*
+  && chmod +x /scripts/schema/*.sh
 
 EXPOSE 3306
 

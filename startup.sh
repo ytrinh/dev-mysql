@@ -66,6 +66,8 @@ EOF
 	echo "[i] run tempfile: $tfile"
 	/usr/bin/mysqld --user=mysql --bootstrap --verbose=0 < $tfile
 	rm -f $tfile
+
+    /scripts/schema/init-db.sh &
 fi
 
 echo "[i] Sleeping 5 sec"
